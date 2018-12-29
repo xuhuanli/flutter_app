@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/sample.dart';
+import 'package:flutter_app/stateDemo.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes:{
+        "pageOne":(context)=>TabbedAppBarSample()
+      },
       title: "Battle",
       color: Colors.yellow,
       debugShowCheckedModeBanner: false,
@@ -20,10 +25,12 @@ class MyApp extends StatelessWidget {
       home: HomePage(title: "Battle_Title"),
     );
   }
+
 }
 
 class HomePage extends StatefulWidget {
   final String title;
+  final int initValue = 0;
 
   const HomePage({Key key, this.title}) : super(key: key);
 
@@ -35,12 +42,50 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   final String title;
-  int _counter = 0;
+  int _counter;
 
   _HomePage(this.title);
 
   @override
+  void initState() {
+    super.initState();
+    _counter = widget.initValue;
+    print("initState");
+  }
+
+  @override
+  void didUpdateWidget(HomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("didUpdateWidget");
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    print("deactive");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print("dispose");
+  }
+
+  @override
+  void reassemble() {
+    super.reassemble();
+    print("reassemble");
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print("didChangeDependencies");
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print("build");
     return Scaffold(
       appBar: _buildAppBar(title),
       backgroundColor: Colors.purple,
@@ -52,18 +97,20 @@ class _HomePage extends State<HomePage> {
               "click the FloatButton more times",
               style: TextStyle(fontSize: 20.0),
             ),
-            Text("$_counter")
+            Text("$_counter"),
+            ParentWidget(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _increaseCounter();
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) {
-              return TabbedAppBarSample();
-            },
-          ));
+          Navigator.of(context).pushNamed("pageOne");
+          /*Navigator.of(context)
+              .push(MaterialPageRoute(
+                builder: (context) => TabbedAppBarSample(),
+              ))
+              .then((onValue) => print("sss"));*/
         },
         foregroundColor: Colors.black,
         child: Icon(Icons.add),
