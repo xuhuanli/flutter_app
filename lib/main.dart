@@ -1,20 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/HightLight.dart';
 import 'package:flutter_app/sample.dart';
-import 'package:flutter_app/stateDemo.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes:{
-        "pageOne":(context)=>TabbedAppBarSample()
-      },
+      routes: {"pageOne": (context) => TabbedAppBarSample()},
       title: "Battle",
       color: Colors.yellow,
       debugShowCheckedModeBanner: false,
@@ -25,7 +22,6 @@ class MyApp extends StatelessWidget {
       home: HomePage(title: "Battle_Title"),
     );
   }
-
 }
 
 class HomePage extends StatefulWidget {
@@ -93,12 +89,36 @@ class _HomePage extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            DefaultTextStyle(
+              style: TextStyle(
+                color: Colors.yellow,
+                fontSize: 20.0,
+              ),
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text("hello_1"),
+                  Text(
+                    "hello_2",
+                    style: TextStyle(inherit: false),
+                  ),
+                  Text(
+                    "Hello*N" * 8,
+                    style: TextStyle(inherit: true),
+                  ),
+                ],
+              ),
+            ),
             Text(
-              "click the FloatButton more times",
-              style: TextStyle(fontSize: 20.0),
+              "click the FloatButton more times" * 4,
+              softWrap: true,
+              style: TextStyle(fontSize: 20.0, height: 1.1),
+              textScaleFactor: 1.0,
             ),
             Text("$_counter"),
-            ParentWidget(),
+            ParentWidgetC(),
           ],
         ),
       ),

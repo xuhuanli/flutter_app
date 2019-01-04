@@ -14,7 +14,8 @@ class _ParentWidgetState extends State<ParentWidget> {
   Widget build(BuildContext context) {
     return TabBoxB(
       active: _active,
-      onChanged: (bool newValue) { //这是一个回调函数
+      onChanged: (bool newValue) {
+        //这是一个回调函数
         print("newValue is $newValue");
         setState(() => _active = newValue);
       },
